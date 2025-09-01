@@ -9,7 +9,7 @@ string solution(string s, int n)
     {
         if(s[i] >= 'a' && s[i] <= 'z')
         {
-            s[i]+n > 'z' ? s[i] += n - 'z' + 'a' - 1 : s[i] += n;
+            s[i]+n > 'z' ? s[i] += n - 26 : s[i] += n;
         }
         else if(s[i] >= 'A'&& s[i] <= 'Z')
         {
