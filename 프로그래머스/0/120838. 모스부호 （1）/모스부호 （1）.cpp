@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <sstream>
 using namespace std;
 map<string, char> morse =
 { 
@@ -33,24 +34,15 @@ map<string, char> morse =
 };
 string solution(string letter) {
     string answer = "";
-    string temp = "";
-    for(int i=0; i <letter.size(); i++)
+    stringstream ss(letter);
+    string s;
+    while(!ss.eof())
     {
-        if(letter[i] != ' ')
+        ss >> s;
+        auto it = morse.find(s);
+        if(it != morse.end())
         {
-            temp += letter[i];
-        }
-        else
-        {
-            auto it = morse.find(temp);
             answer += it->second;
-            temp = "";
-        }
-        if(i == letter.size()-1)
-        {
-            auto it = morse.find(temp);
-            answer += it->second;
-            temp = "";
         }
     }
     return answer;
