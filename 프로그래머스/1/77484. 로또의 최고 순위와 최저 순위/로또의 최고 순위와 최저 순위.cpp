@@ -5,8 +5,8 @@ using namespace std;
 
 vector<int> solution(vector<int> lottos, vector<int> win) {
     vector<int> answer;
-    int temp = 0;
-    int dang = 0;
+    int max = 0;
+    int low = 0;
     int arr[7] = {6 ,6, 5, 4, 3, 2, 1};
     // 로또 알아볼수있는 부분만 맞췄다면 최저등수
     // 로또의 알아볼수 없는 부분도 모두 맞췄다면 최고 등수
@@ -17,14 +17,15 @@ vector<int> solution(vector<int> lottos, vector<int> win) {
         //해당 번호가 있는지 확인
         if (a == 0) 
         {
-            ++temp;
+            ++max;
         }
         else if (find(win.begin(), win.end(), a) != win.end())
         {
-            ++dang;
+            ++low;
+            ++max;
         }
     }
-    answer.push_back(arr[dang+temp]);
-    answer.push_back(arr[dang]);
+    answer.push_back(arr[max]);
+    answer.push_back(arr[low]);
     return answer;
 }
