@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <algorithm>
 using namespace std;
 
 string solution(vector<string> participant, vector<string> completion) {
