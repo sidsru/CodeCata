@@ -15,7 +15,7 @@ bool check4(vector<int>& v){
 int solution(vector<int> ingredient) {
     int answer = 0;
     vector<int> v;
-    for(int it: ingredient){
+    for(int& it: ingredient){
         v.push_back(it);
         while(check4(v)){
             for(int i=0; i<4; i++) v.pop_back();
