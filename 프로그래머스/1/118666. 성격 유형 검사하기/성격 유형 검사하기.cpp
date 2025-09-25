@@ -22,9 +22,9 @@ string solution(vector<string> survey, vector<int> choices) {
         else if ( choices[i] == 1 ) mbti[a[0]] += 3;
         ++i;
     }
-    mbti['R'] >= mbti['T'] ? answer += 'R' : answer += 'T';
-    mbti['C'] >= mbti['F'] ? answer += 'C' : answer += 'F';
-    mbti['J'] >= mbti['M'] ? answer += 'J' : answer += 'M';
-    mbti['A'] >= mbti['N'] ? answer += 'A' : answer += 'N';
+    answer += (mbti['R'] >= mbti['T'] ? 'R' : 'T');
+    answer += (mbti['C'] >= mbti['F'] ? 'C' : 'F');
+    answer += (mbti['J'] >= mbti['M'] ? 'J' : 'M');
+    answer += (mbti['A'] >= mbti['N'] ? 'A' : 'N');
     return answer;
 }
