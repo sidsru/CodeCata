@@ -7,10 +7,7 @@ bool comp(string a, string b)
 {
     if(a.size() == b.size())
     {
-        for(int i=0; i<a.size(); i++)
-        {
-            if(a[i] != b[i])return a[i] < b[i];
-        }
+        return a < b;
     }
     return a.size() < b.size();
 }
@@ -26,12 +23,16 @@ int main()
     for(int i=0; i<n; i++)
     {
         cin >> s;
-        if(find(dano.begin(), dano.end(), s) == dano.end()) dano.push_back(s);
+        //if(find(dano.begin(), dano.end(), s) == dano.end());
+        dano.push_back(s);
     }
     sort(dano.begin(), dano.end(), comp);
+    string before = "";
     for(vector<string>::iterator it = dano.begin(); it != dano.end(); it++)
     {
+        if(before == *it) continue;
         cout << *it << "\n";
+        before = *it;
     }
     return 0;
 }
