@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 using namespace std;
 
@@ -18,21 +17,19 @@ int main()
     cout.tie(NULL);
     int n;
     cin >> n;
-    string s;
-    vector<string> dano;
+    string s[20001];
     for(int i=0; i<n; i++)
     {
-        cin >> s;
+        cin >> s[i];
         //if(find(dano.begin(), dano.end(), s) == dano.end());
-        dano.push_back(s);
     }
-    sort(dano.begin(), dano.end(), comp);
+    sort(s, s+n, comp);
     string before = "";
-    for(vector<string>::iterator it = dano.begin(); it != dano.end(); it++)
+    for(int i=0;i<n;i++)
     {
-        if(before == *it) continue;
-        cout << *it << "\n";
-        before = *it;
+        if(before == s[i]) continue;
+        cout << s[i] << "\n";
+        before = s[i];
     }
     return 0;
 }
