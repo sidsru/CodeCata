@@ -1,12 +1,12 @@
 #include <iostream>
 using namespace std;
-int function(int a, int b)
+long long function(long long a, long long b)
 {
     return (a+b)*(a-b);
 }
 int main()
 {
-    int a, b;
+    long long a, b;
     cin >> a >> b;
     cout << function(a, b);
 }
