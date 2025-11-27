@@ -1,4 +1,4 @@
-#include <iostream>
+#include <stdio.h>
 using namespace std;
 inline int Min(int a, int b)
 {
@@ -19,4 +19,5 @@ int main()
         }
     }
     printf("%d",dp[n]);
+    return 0;
 }
