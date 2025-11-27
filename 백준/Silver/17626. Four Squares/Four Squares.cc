@@ -1,10 +1,10 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
-/*inline int Min(int a, int b)
+inline int Min(int a, int b)
 {
     return a < b ? a : b;
-}*/
+}
 
 int main()
 {
@@ -20,7 +20,7 @@ int main()
         dp[i] = dp[i-1] + 1;
         for(int j=2; j*j<=i; j++)
         {
-            dp[i] = min(dp[i], dp[i - j*j] + 1);
+            dp[i] = Min(dp[i], dp[i - j*j] + 1);
         }
     }
     
