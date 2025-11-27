@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 using namespace std;
 inline int Min(int a, int b)
 {
@@ -8,13 +7,9 @@ inline int Min(int a, int b)
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    
     int dp[50001];
     int n;
-    cin >> n;
+    scanf("%d", &n);
     for(int i=1; i<=n; i++)
     {
         dp[i] = dp[i-1] + 1;
@@ -23,6 +18,5 @@ int main()
             dp[i] = Min(dp[i], dp[i - j*j] + 1);
         }
     }
-    
-    cout << dp[n] << '\n';
+    printf("%d",dp[n]);
 }
