@@ -6,10 +6,8 @@ vector<int> v[1001];
 bool bis[1001] = {false, };
 int answer = 0;
 
-void DFS(int n)
+void BFS(int n)
 {
-    if(bis[n])
-        return;
     queue<int> q;
     q.push(n);
     while(!q.empty())
@@ -41,7 +39,8 @@ int main()
     }
     for(int i=1; i<=N; ++i)
     {
-        DFS(i);
+        if(!bis[i])
+            BFS(i);
     }
     printf("%d", answer);
     return 0;
