@@ -1,6 +1,8 @@
-#include <iostream>
+#include <stdio.h>
 #include <vector>
+#include <string>
 using namespace std;
+
 string W[8] =
 {
     "WBWBWBWB",
@@ -23,49 +25,42 @@ string B[8] =
     "BWBWBWBW",
     "WBWBWBWB"
 };
-int compB(const vector<string>& s, const int& x, const int& y)
+char arr[50][50];
+inline int Min(const int& a, const int& b) {return a < b ? a : b;}
+
+int compW(const int& x, const int& y)
 {
-    int cnt = 0;
-    for(int i=0; i<8; i++)
-    {
-        for(int j = 0; j<8; j++)
-        {
-            if(s[x+i][y+j] != B[i][j]) ++cnt;
-        }
-    }
-    return cnt;
+    int result = 0;
+    for(int i=0; i<8; ++i)
+        for(int j=0; j<8; ++j)
+            if(arr[x+i][y+j] != W[i][j])
+                ++result;
+    return result;
 }
-int compW(const vector<string>& s, const int& x, const int& y)
+int compB(const int& x, const int& y)
 {
-    int cnt = 0;
-    for(int i=0; i<8; i++)
-    {
-        for(int j = 0; j<8; j++)
-        {
-            if(s[x+i][y+j] != W[i][j]) ++cnt;
-        }
-    }
-    return cnt;
+    int result = 0;
+    for(int i=0; i<8; ++i)
+        for(int j=0; j<8; ++j)
+            if(arr[x+i][y+j] != B[i][j])
+                ++result;
+    return result;
 }
 int main()
 {
     int n, m;
-    cin >> n >> m;
-    vector<string> s;
-    for(int i = 0; i<n; i++)
+    
+    scanf("%d %d", &n, &m);
+    for(int i=0; i<n; ++i)
     {
-        string temp;
-        cin >> temp;
-        s.push_back(temp);
+        scanf("%s", arr[i]);
     }
-    int Min = 65, answer = 0;
-    for(int i=0; i<n-7;i++)
-    {
-        for(int j=0; j<m-7;j++)
+        
+    int minnum = 65, answer = 0;
+    for(int i=0; i<n-7; ++i)
+        for(int j=0; j<m-7; ++j)
         {
-            answer = min(compB(s,i,j),compW(s,i,j));
-            Min = min(answer, Min);
+            minnum = Min(Min(compB(i,j),compW(i,j)), minnum);
         }
-    }
-    cout << Min << endl;
+    printf("%d", minnum);
 }
