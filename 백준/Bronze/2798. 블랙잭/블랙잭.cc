@@ -1,51 +1,23 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <vector>
-#include <algorithm>
-std::vector<int> Division(std::string& s)
-{
-    std::istringstream Ss(s);
-    std::string temp;
-    std::vector<int> Nums;
-    while(Ss >> temp)Nums.push_back(stoi(temp));
-    return Nums;
-}
+#include <stdio.h>
 
-int approximation(std::vector<int> s,int n, int m)
+inline int Max(int a, int b)
 {
-    int sum = 0, result = 0;  
-    for(int i = 0; i < n; i++)
-    {
-        for(int j=i+1; j<n; j++)
-        {
-            for(int k = j+1; k<n; k++)
-            {
-                sum = s[i] + s[j] + s[k];
-                if(sum >result && sum <= m) result = sum;
-            }
-        }
-    }
-    return result;
+    return a > b ? a : b;
 }
 int main()
 {
+    int answer=0, n, m, arr[101];
+    scanf("%d %d", &n, &m);
+    for(int i=0; i<n; ++i)
+        scanf("%d", &arr[i]);
     
-    
-    int N, M;
-    std::cin >> N >> M;
-    getchar();
-    
-    std::string Rist;
-    getline(std::cin, Rist);
-    //std::cout << Rist << std::endl;
-    
-    std::vector<int> Nums = Division(Rist);
-    /*for(auto& a : Nums)
-    {
-        std::cout << a << std::endl;
-    }*/
-    std::cout << approximation(Nums, N, M);
-
-    return 0;
+    for(int i=0; i<n-2; ++i)
+        for(int j=i+1; j<n-1; ++j)
+            for(int k=j+1; k<n; ++k)
+            {
+                int sum = arr[i] + arr[j] + arr[k];
+                if(sum<=m)
+                    answer = Max(sum, answer);
+            }
+    printf("%d", answer);
 }
