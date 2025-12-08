@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 int xmove[4] = {0, 0, 1, -1};
 int ymove[4] = {1, -1, 0, 0};
@@ -8,18 +9,26 @@ int answer = 0, n ,m;
 
 void DFS(const int x, const int y)
 {
-    vis[x][y] = true;
-    if(s[x][y] =='P')
-        ++answer;
-    for(int i=0; i<4; i++)
+    queue<pair<int, int>> q;
+    q.push({x, y});
+    while(!q.empty())
     {
-        int xx = x + xmove[i];
-        int yy = y + ymove[i];
-        if(xx >= n || yy >= m || xx < 0 || yy < 0)
-            continue;
-        if(vis[xx][yy] || s[xx][yy] == 'X')
-            continue;
-        DFS(xx, yy);
+        int x = q.front().first;
+        int y = q.front().second;
+        q.pop();
+        for(int i=0; i<4; ++i)
+        {
+            int xx = x + xmove[i];
+            int yy = y + ymove[i];
+            if(xx >= n || yy >= m || xx < 0 || yy < 0)
+                continue;
+            if(vis[xx][yy] || s[xx][yy] == 'X')
+                continue;
+            q.push({xx, yy});
+            vis[xx][yy] = true;
+            if(s[xx][yy] == 'P')
+                ++answer;
+        }
     }
     return;
 }
