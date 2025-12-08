@@ -6,7 +6,7 @@ bool vis[601][601] = {false, };
 string s[601];
 int answer = 0, n ,m;
 
-void BFS(const int x, const int y)
+void DFS(const int x, const int y)
 {
     vis[x][y] = true;
     if(s[x][y] =='P')
@@ -19,7 +19,7 @@ void BFS(const int x, const int y)
             continue;
         if(vis[xx][yy] || s[xx][yy] == 'X')
             continue;
-        BFS(xx, yy);
+        DFS(xx, yy);
     }
     return;
 }
@@ -43,7 +43,7 @@ int main()
                 }
             }
     }
-    BFS(ix, iy);
+    DFS(ix, iy);
     if(!answer)
     {
         cout << "TT";
