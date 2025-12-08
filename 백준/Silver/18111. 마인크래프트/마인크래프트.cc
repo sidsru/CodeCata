@@ -11,19 +11,19 @@ void findblock(const int& h, int b)
     int ptime = 0;
     for(int i=0; i<n; ++i)
         for(int j=0; j<m; ++j)
+        {
             if(arr[i][j]>h)
             {
                 ptime += (arr[i][j] - h) << 1;
                 b += arr[i][j] - h;
             }
-        
-    for(int i=0; i<n; ++i)
-        for(int j=0; j<m; ++j)
-            if(arr[i][j] < h)
+            else if(arr[i][j] < h)
             {
                 ptime += h - arr[i][j];
                 b -= h - arr[i][j] ;
             }
+        }
+            
     if(b>=0)
     {
         time = Min(time, ptime);
