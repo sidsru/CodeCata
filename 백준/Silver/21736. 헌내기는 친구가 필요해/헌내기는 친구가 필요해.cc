@@ -7,7 +7,7 @@ bool vis[601][601] = {false, };
 string s[601];
 int answer = 0, n ,m;
 
-void DFS(const int x, const int y)
+void BFS(const int x, const int y)
 {
     queue<pair<int, int>> q;
     q.push({x, y});
@@ -52,7 +52,7 @@ int main()
                 }
             }
     }
-    DFS(ix, iy);
+    BFS(ix, iy);
     if(!answer)
     {
         cout << "TT";
