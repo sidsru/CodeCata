@@ -8,17 +8,16 @@ string target = "";
 string aeoiu = "AEIOU";
 void dfs(string s)
 {
-    ++cnt;;
-    if(target == s)
+    ++cnt;
+    if(s == target)
     {
         answer = cnt;
         return;
     }
-    if(s.size() >= aeoiu.size())return;
-    for(int i=0; i<aeoiu.size(); i++)
-    {
+    if(s.size() >= 5)
+        return;
+    for(int i=0; i<5; ++i)
         dfs(s + aeoiu[i]);
-    }
 }
 int solution(string word) {
     target = word;
