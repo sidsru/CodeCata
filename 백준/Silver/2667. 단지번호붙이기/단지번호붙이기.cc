@@ -7,8 +7,7 @@ int n;
 bool visible[26][26] = {false, };
 bool maps[26][26] = {false, };
 vector<int> v;
-int xmove[4] = {1, -1, 0, 0};
-int ymove[4] = {0, 0, 1, -1};
+
 inline bool map(int x, int y)
 {
     return (x < 0 || y < 0 || n <= x || n <= y);
@@ -17,6 +16,8 @@ void BFS(int x, int y)
 {
     if(visible[x][y] || !maps[x][y])
         return;
+    int xmove[4] = {1, -1, 0, 0};
+    int ymove[4] = {0, 0, 1, -1};
     queue<pair<int, int>>q;
     q.push({x, y});
     visible[x][y] = true;
@@ -59,15 +60,10 @@ int main()
         }
     }
     for(int i=0; i<n; ++i)
-    {
         for(int j=0; j<n; ++j)
-        {
             if(maps[i][j])
-            {
                 BFS(i, j);
-            }
-        }
-    }
+    
     sort(v.begin(), v.end());
     cout << v.size() << '\n';
     for(int a : v)
