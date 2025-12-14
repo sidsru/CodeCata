@@ -1,38 +1,33 @@
 #include <iostream>
 using namespace std;
 
-bool chack(const int& n, const int& point, const string& s)
+int main()
 {
-    for(int i = 1; i<= n<<1; ++i)
+    int n, length, cnt = 0, temp = 0;
+    int counting = 0, tempcnt = 0;
+    cin >> n >> length;
+    string s;
+    cin >> s;
+    for(int i = 1; i < length-1; ++i)
     {
-        if(i & 1)
+        char c = s[i-1];
+        if(c != s[i])
         {
-            if(s[i+point] != 'O')
+            if(s[i] == 'O')
             {
-                return false;
+                if(s[i+1] == 'I')
+                    ++counting;
             }
         }
         else
         {
-            if(s[i+point] != 'I')
-            {
-                return false;
-            }
+            tempcnt = counting >= n ? counting - n + 1 : 0;
+            cnt += tempcnt;
+            tempcnt = 0;
+            counting = 0;
         }
     }
-    return true;
-}
-int main()
-{
-    int n, length, cnt = 0;
-    cin >> n >> length;
-    string s;
-    cin >> s;
-    for(int i=0; i<length - n; ++i)
-    {
-        if(s[i] == 'I')
-            if(chack(n, i, s))
-                ++cnt;
-    }
+    tempcnt = counting >= n ? counting - n + 1 : 0;
+    cnt += tempcnt;
     cout << cnt;
 }
