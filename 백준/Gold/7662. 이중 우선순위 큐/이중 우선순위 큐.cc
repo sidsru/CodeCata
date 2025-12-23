@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <algorithm>
 #include <queue>
-#include <map>
+#include <iostream>
 using namespace std;
 class dq
 {
@@ -24,6 +22,7 @@ public:
         {
             bIsAlive[maxq.top().second] = false;
             maxq.pop();
+            clearq();
         }
     }
     void deletemin()
@@ -32,9 +31,10 @@ public:
         {
             bIsAlive[minq.top().second] = false;
             minq.pop();
+            clearq();
         }
     }
-    void clearq()
+    inline void clearq()
     {
         while(!minq.empty() && !bIsAlive[minq.top().second])
         {
@@ -45,33 +45,38 @@ public:
             maxq.pop();
         }
     }
-    void printq()
+    inline string printq() const
     {
-        if(minq.empty())
+        if(minq.empty() && maxq.empty())
         {
-            printf("EMPTY\n");
+            return "EMPTY\n";
         }
         else
         {
-            printf("%d %d\n",maxq.top().first ,minq.top().first);
+            return to_string(maxq.top().first) + " " +to_string(minq.top().first) +"\n";
         }
     }
 };
 
 int main ()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    
     int t;
-    scanf("%d", &t);
+    cin >> t;
     for(int i=0; i<t; ++i)
     {
         dq q;
         int k;
-        scanf("%d", &k);
+        cin >> k;
         for(int j=0; j<k; ++j)
         {
             char c;
+            cin >> c;
             int n;
-            scanf(" %c %d", &c, &n);
+            cin >> n;
             if(c == 'I')
             {
                 q.insert(n);
@@ -86,10 +91,9 @@ int main ()
                 {
                     q.deletemax();
                 }
-                q.clearq();
             }
         }
         q.clearq();
-        q.printq();
+        cout << q.printq();
     }
 }
