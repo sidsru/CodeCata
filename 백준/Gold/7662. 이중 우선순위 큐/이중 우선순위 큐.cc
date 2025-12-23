@@ -6,21 +6,23 @@ using namespace std;
 class dq
 {
 private:
-    priority_queue<int, vector<int>, greater<int>> minq;
-    priority_queue<int, vector<int>, less<int>> maxq;
-    map<int, int> cnt;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minq;
+    priority_queue<pair<int, int>> maxq;
+    bool bIsAlive[1000000] = {false, };
+    int cnt = 0;
 public:
     void insert(const int n)
     {
-        minq.push(n);
-        maxq.push(n);
-        ++cnt[n];
+        minq.push({n, cnt});
+        maxq.push({n, cnt});
+        bIsAlive[cnt] = true;
+        ++cnt;
     }
     void deletemax()
     {
         if(!maxq.empty())
         {
-            --cnt[maxq.top()];
+            bIsAlive[maxq.top().second] = false;
             maxq.pop();
         }
     }
@@ -28,30 +30,30 @@ public:
     {
         if(!minq.empty())
         {
-            --cnt[minq.top()];
+            bIsAlive[minq.top().second] = false;
             minq.pop();
         }
     }
     void clearq()
     {
-        while(!minq.empty() && cnt[minq.top()] == 0)
+        while(!minq.empty() && !bIsAlive[minq.top().second])
         {
             minq.pop();
         }    
-        while(!maxq.empty() && cnt[maxq.top()] == 0)
+        while(!maxq.empty() && !bIsAlive[maxq.top().second])
         {
             maxq.pop();
         }
     }
     void printq()
     {
-        if(minq.empty() || maxq.empty())
+        if(minq.empty())
         {
             printf("EMPTY\n");
         }
         else
         {
-            printf("%d %d\n",maxq.top() ,minq.top());
+            printf("%d %d\n",maxq.top().first ,minq.top().first);
         }
     }
 };
