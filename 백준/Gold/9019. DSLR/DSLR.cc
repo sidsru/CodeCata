@@ -14,37 +14,13 @@ inline int S(int n)
 }
 inline int L(int n)
 {
-    int temp[4] = {0,0,0,0};
-    int answer = 0;
-    for(int i=3; i>=0; --i)
-    {
-        temp[i] = n%10;
-        n /= 10;
-    }
-    for(int i=1;i<4; ++i)
-    {
-        answer += temp[i];
-        answer *= 10;
-    }
-    answer += temp[0];
-    return answer;
+    int ln = n / 1000;
+    return ((n*10)%10000) + ln;
 }
 inline int R(int n)
 {
-    int temp[4] = {0,0,0,0};
-    int answer = 0;
-    for(int i=3; i>=0; --i)
-    {
-        temp[i] = n%10;
-        n /= 10;
-    }
-    answer += temp[3];
-    for(int i=0;i<3; ++i)
-    {
-        answer *= 10;
-        answer += temp[i];
-    }
-    return answer;
+    int rn = n%10;
+    return (rn*1000) + (n/10);
 }
 
 string BFS(const int n, const int target)
@@ -88,6 +64,9 @@ string BFS(const int n, const int target)
 }
 int main ()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
     int t;
     cin >> t;
     for(int i=0; i<t; ++i)
