@@ -1,22 +1,30 @@
 #include <stdio.h>
 #include <vector>
+#include <queue>
 using namespace std;
 int arr[100001] = { 0, };
-bool visited[100001] = { false, };
 vector<int> v[100001];
-
-void DFS(const int now)
+bool visited[100001] = { false, };
+void BFS()
 {
-	for (int i = 0; i < v[now].size(); ++i)
+	queue<int> q;
+	q.push(1);
+	visited[1] = false;
+	while (!q.empty())
 	{
-		int next = v[now][i];
-		if (visited[next])
+		int node = q.front();
+		q.pop();
+		for (int i = 0; i < v[node].size(); ++i)
 		{
-			continue;
+			int next = v[node][i];
+			if (visited[next])
+			{
+				continue;
+			}
+			visited[next] = true;
+			arr[next] = node;
+			q.push(next);
 		}
-		visited[next] = true;
-		arr[next] = now;
-		DFS(next);
 	}
 	return;
 }
@@ -24,6 +32,7 @@ int main()
 {
 	int n;
 	scanf("%d", &n);
+	
 	for (int i = 0; i < n; ++i)
 	{
 		int x, y;
@@ -31,7 +40,7 @@ int main()
 		v[x].push_back(y);
 		v[y].push_back(x);
 	}
-	DFS(1);
+	BFS();
 	for (int i = 2; i <=n; ++i)
 	{
 		printf("%d\n", arr[i]);
