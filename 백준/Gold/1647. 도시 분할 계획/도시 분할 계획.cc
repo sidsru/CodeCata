@@ -1,6 +1,5 @@
 // 백준
-#define _CRT_SECURE_NO_WARNINGS
-#include <cstdio>
+#include <iostream>
 #include <vector>
 #include <algorithm>
 
@@ -8,7 +7,14 @@ using namespace std;
 
 int n, m, answer = 0;
 int edges[100001];
-vector<pair<int,pair<int, int>>> arr;
+struct Edges
+{
+	int homea, homeb, cost;
+	bool operator < (const Edges& other) const
+	{
+		return cost < other.cost;
+	}
+};
 
 
 int FindRoot(const int a)
@@ -31,39 +37,35 @@ void unionfind(const int a, const int b)
 	return;
 
 }
-void kruskal()
+void kruskal(const vector<Edges>&  arr)
 {
-	int cnt = 0;
-    vector<int> res;
-	for (int i = 0;i<arr.size(); ++i)
+	int cnt = 0, answer = 0, max = 0;
+	for (int i = 0; i < arr.size(); ++i)
 	{
-		int cost = arr[i].first;
-		int a = arr[i].second.first;
-		int b = arr[i].second.second;
+		int cost = arr[i].cost;
+		int a = arr[i].homea;
+		int b = arr[i].homeb;
 		if (FindRoot(a) != FindRoot(b))
 		{
+			answer += cost;
+			max = cost;
 			unionfind(a, b);
 			++cnt;
-            res.push_back(cost);
 		}
 		if (cnt == n - 1)
 		{
 			break;
 		}
 	}
-    for(int i=0; i<res.size()-1; ++i)
-    {
-        answer += res[i];
-    }
+	printf("%d", answer - max);
 }
 void input()
 {
-	scanf("%d %d", &n, &m);
+	cin >> n >> m;
+	vector<Edges> arr(m);
 	for (int i = 0; i < m; ++i)
 	{
-		int homea, homeb, cost;
-		scanf("%d %d %d", &homea, &homeb, &cost);
-		arr.push_back({ cost,{homea, homeb} });
+		cin >> arr[i].homea >> arr[i].homeb >> arr[i].cost;
 	}
 	sort(arr.begin(), arr.end());
 
@@ -71,13 +73,15 @@ void input()
 	{
 		edges[i] = i;
 	}
+	kruskal(arr);
 	return;
 }
 
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
 	input();
-	kruskal();
-	printf("%d", answer);
 	return 0;
 }
