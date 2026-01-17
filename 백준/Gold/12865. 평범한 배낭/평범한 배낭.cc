@@ -4,7 +4,7 @@
 using namespace std;
 
 int n, k;
-int DP[101][100001] = { 0 };
+int DP[100001] = { 0 };
 
 void Input()
 {
@@ -13,20 +13,13 @@ void Input()
 	{
 		int w, v;
 		cin >> w >> v;
-		for (int j = 0; j <= k; ++j)
+		for (int j = k; j >= w; --j)
 		{
-			if (j >= w)
-			{
-				DP[i][j] = DP[i - 1][j] > DP[i - 1][j - w] + v ?
-					(DP[i - 1][j]) : (DP[i - 1][j - w] + v);
-			}
-			else
-			{
-				DP[i][j] = DP[i - 1][j];
-			}
+			DP[j] = DP[j] > DP[j - w] + v ?
+				(DP[j]) : (DP[j - w] + v);
 		}
 	}
-	cout << DP[n][k];
+	cout << DP[k];
 }
 int main()
 {
