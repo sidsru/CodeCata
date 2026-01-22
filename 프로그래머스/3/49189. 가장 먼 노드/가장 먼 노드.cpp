@@ -35,12 +35,7 @@ void BFS(const vector<vector<int>>& v)
 	}
 }
 int solution(int n, vector<vector<int>> edge) {
-	vector<vector<int>> v;
-	v.push_back(vector<int>());
-	for (int i = 1; i <= edge.size(); ++i)
-	{
-		v.push_back(vector<int>());
-	}
+	vector<vector<int>> v(n+1);
 	for (vector<int> e : edge)
 	{
 		v[e[0]].push_back(e[1]);
