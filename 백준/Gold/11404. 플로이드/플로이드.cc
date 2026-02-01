@@ -2,7 +2,7 @@
 #include <iostream>
 #define endl '\n'
 using namespace std;
-constexpr int INF = (~0U >> 1);
+constexpr int INF = 1e9;//(~0U >> 1);
 
 int n, m;
 int arr[101][101];
@@ -44,8 +44,6 @@ int main()
 		{
 			for (int to = 1; to <= n; to++)
 			{
-				if (arr[from][mid] == INF || arr[mid][to] == INF)
-					continue;
 				arr[from][to] = min(arr[from][mid] + arr[mid][to], arr[from][to]);
 			}
 		}
