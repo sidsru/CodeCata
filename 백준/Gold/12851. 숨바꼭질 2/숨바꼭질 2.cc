@@ -15,7 +15,6 @@ void BFS(const int start, const int end)
 	visited[start] = true;
 	while (!q.empty())
 	{
-		visited[end] = false;
 		int now = q.front().first;
 		int cnt = q.front().second;
 		q.pop();
