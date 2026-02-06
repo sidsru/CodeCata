@@ -27,7 +27,7 @@ void Diffusion()
 			if (map[i][j] > 0)
 			{
 				int Amount = map[i][j] / 5;
-				q.push(make_pair(Amount, make_pair(i,j)));
+				q.push(make_pair(Amount, make_pair(i, j)));
 			}
 		}
 	}
@@ -114,16 +114,16 @@ int main()
 		for (int j = 0; j < c; ++j)
 		{
 			cin >> map[i][j];
-			if (map[i][j] == -1)
+		}
+	}
+	for (int i = 2; i < r; i++)
+	{
+		if (map[i][0] == -1)
+		{
+			if (purifier[Up] == 0)
 			{
-				if (purifier[Up] == 0)
-				{
-					purifier[Up] = i;
-				}
-				else
-				{
-					purifier[Down] = i;
-				}
+				purifier[Up] = i;
+				purifier[Down] = i+1;
 			}
 		}
 	}
