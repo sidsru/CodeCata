@@ -1,6 +1,6 @@
 // 백준
 #include <iostream>
-#include <set>
+#include <unordered_set>
 #define endl '\n'
 using namespace std;
 constexpr int INF = (~0U >> 1);
@@ -10,7 +10,7 @@ int main()
 	cin.tie(nullptr);
 	string s;
 	cin >> s;
-	set<string> st;
+	unordered_set<string> st;
 	for (int i = 0; i < s.size(); i++)
 	{
 		for (int j = 1; j <= s.size(); j++)
