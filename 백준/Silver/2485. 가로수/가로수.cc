@@ -21,21 +21,13 @@ int main()
 	{
 		cin >> arr[i];
 	}
-	int map[100001] = {};
-	for (int i = 1; i < n; i++)
+	int answer = arr[1] - arr[0];
+	for (int i = 2; i < n; i++)
 	{
-		map[i - 1] = arr[i] - arr[i - 1];
+		answer = GCD(arr[i] - arr[i - 1] , answer);
 	}
-	int answer = map[0];
-	for (int i = 1; i < n - 1; i++)
-	{
-		answer = GCD(map[i], answer);
-	}
-	int ans = 0;
-	for (int i = 0; i < n - 1; i++)
-	{
-		ans += map[i] / answer - 1;
-	}
-	cout << ans;
+	int dist = arr[n - 1] - arr[0];
+
+	cout << (dist/answer) + 1 - n;
 	return 0;
 }
